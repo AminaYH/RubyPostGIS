@@ -5,20 +5,15 @@ application up and running.
 
 Things you may want to cover:
 
-* Ruby version
+* Rails version  7.0
 
-* System dependencies
-
-* Configuration
+* System dependencies: postgres  postgis postgresql16-postgis-3.4.2
 
 * Database creation
+  CREATE EXTENSION postgis;
 
-* Database initialization
+  Update config/database.yml
 
-* How to run the test suite
+      default: &default
+      adapter: postgis
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
