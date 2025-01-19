@@ -1,0 +1,22 @@
+<div id="map" style="height: 600px;"></div>
+
+<script>
+    // Initialize the map
+    var map = L.map('map').setView([51.505, -0.09], 13);
+
+    // Add a tile layer
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+    }).addTo(map);
+
+    // Fetch GeoJSON data and add it to the map
+    fetch('<%= maps_path(format: :json) %>')
+        .then(response => response.json())
+        .then(data => {
+            L.geoJSON(data, {
+                onEachFeature: function (feature, layer) {
+                    layer.bindPopup(feature.properties.name); // Show name on click
+                }
+            }).addTo(map);
+        });
+</script>

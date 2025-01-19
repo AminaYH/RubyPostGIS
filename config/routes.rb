@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get "maps/index"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -11,4 +12,9 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
+end
+
+Rails.application.routes.draw do
+  root "maps#index" # This sets the root path to the MapsController's index action
+  get "maps", to: "maps#index", as: :maps # This creates the `maps_path` helper
 end
