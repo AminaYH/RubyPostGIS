@@ -7,6 +7,7 @@ Things you may want to cover:
 
 * Rails version  7.0
 
+
 * System dependencies: postgres  postgis postgresql16-postgis-3.4.2
 
 * Database creation
