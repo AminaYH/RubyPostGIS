@@ -391,7 +391,8 @@ DEPENDENCIES
   puma (>= 5.0)
   rack-cors
   rails (~> 7.0)
-  rgeo
+  rgeo (~> 3.0)
+  rgeo-activerecord
   rgeo-geojson
   rubocop-rails-omakase
   selenium-webdriver
