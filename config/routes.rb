@@ -18,3 +18,6 @@ Rails.application.routes.draw do
   root "maps#index" # This sets the root path to the MapsController's index action
   get "maps", to: "maps#index", as: :maps # This creates the `maps_path` helper
 end
+Rails.application.routes.draw do
+  resources :red_zones, only: [:index]
+end
