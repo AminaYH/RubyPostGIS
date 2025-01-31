@@ -39,5 +39,6 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_28_231610) do
     t.polygon "geom"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.geometry "geom_new", limit: {:srid=>4326, :type=>"st_polygon"}
   end
 end

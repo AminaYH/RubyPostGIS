@@ -1,53 +1,86 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Display a map in Cesium JS</title>
-  <script src="https://cesium.com/downloads/cesiumjs/releases/1.116/Build/Cesium/Cesium.js"></script>
-  <link href="https://cesium.com/downloads/cesiumjs/releases/1.116/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
-  <style>
-      body {
-          margin: 0;
-          padding: 0;
-      }
-      #cesiumContainer {position: absolute; top: 0; right: 0; bottom: 0; left: 0;}
-  </style>
-</head>
-<body>
-<div id="cesiumContainer">
-  <a href="https://www.maptiler.com" style="position:absolute;right:10px;bottom:10px;z-index:999;"><img src="https://api.maptiler.com/resources/logo.svg" alt="MapTiler logo"></a>
-</div>
-</body>
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--  <meta charset="UTF-8">-->
+<!--  <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--  <title>Display a map in Cesium JS</title>-->
+<!--  <script src="https://cesium.com/downloads/cesiumjs/releases/1.116/Build/Cesium/Cesium.js"></script>-->
+<!--  <link href="https://cesium.com/downloads/cesiumjs/releases/1.116/Build/Cesium/Widgets/widgets.css" rel="stylesheet">-->
+<!--  <style>-->
+<!--      body {-->
+<!--          margin: 0;-->
+<!--          padding: 0;-->
+<!--      }-->
+<!--      #cesiumContainer {position: absolute; top: 0; right: 0; bottom: 0; left: 0;}-->
+<!--  </style>-->
+<!--</head>-->
+<!--<body>-->
+<!--<div id="cesiumContainer">-->
+<!--  <a href="https://www.maptiler.com" style="position:absolute;right:10px;bottom:10px;z-index:999;"><img src="https://api.maptiler.com/resources/logo.svg" alt="MapTiler logo"></a>-->
+<!--</div>-->
+<!--</body>-->
+<!--<script>-->
+<!--    const key = 'WVwivc9aoI1eTAvWjg6w	';-->
+<!--    const viewer = new Cesium.Viewer('cesiumContainer', {-->
+<!--        animation: false,-->
+<!--        baseLayerPicker: false,-->
+<!--        navigationHelpButton: false,-->
+<!--        sceneModePicker: false,-->
+<!--        homeButton: false,-->
+<!--        geocoder: false,-->
+<!--        fullscreenButton: false,-->
+<!--        timeline: false,-->
+<!--        terrain: new Cesium.Terrain(Cesium.CesiumTerrainProvider.fromUrl(`https://api.maptiler.com/tiles/terrain-quantized-mesh-v2/?key=${key}`, {-->
+<!--            credit: new Cesium.Credit("\u003ca href=\"https://www.maptiler.com/copyright/\" target=\"_blank\"\u003e\u0026copy;MapTiler\u003c/a\u003e \u003ca href=\"https://www.openstreetmap.org/copyright\" target=\"_blank\"\u003e\u0026copy; OpenStreetMap contributors\u003c/a\u003e", true),-->
+<!--            requestVertexNormals: true-->
+<!--        })),-->
+<!--        baseLayer: new Cesium.ImageryLayer( new Cesium.UrlTemplateImageryProvider({-->
+<!--            url: `https://api.maptiler.com/tiles/satellite-v2/{z}/{x}/{y}.jpg?key=${key}`,-->
+<!--            minimumLevel: 0,-->
+<!--            maximumLevel: 20,-->
+<!--            tileWidth: 512,-->
+<!--            tileHeight: 512,-->
+<!--            credit: new Cesium.Credit("\u003ca href=\"https://www.maptiler.com/copyright/\" target=\"_blank\"\u003e\u0026copy; MapTiler\u003c/a\u003e \u003ca href=\"https://www.openstreetmap.org/copyright\" target=\"_blank\"\u003e\u0026copy; OpenStreetMap contributors\u003c/a\u003e", true)-->
+<!--        })),-->
+<!--    });-->
+<!--    viewer.camera.setView({-->
+<!--        destination: Cesium.Cartesian3.fromDegrees(8.67, 46.72, 4500),-->
+<!--        orientation: {-->
+<!--            pitch: Cesium.Math.toRadians(-20)-->
+<!--        }-->
+<!--    });-->
+<!--</script>-->
+<!--</html>-->
+
+<div id="map" style="height: 600px;"></div>
+
 <script>
-    const key = 'WVwivc9aoI1eTAvWjg6w	';
-    const viewer = new Cesium.Viewer('cesiumContainer', {
-        animation: false,
-        baseLayerPicker: false,
-        navigationHelpButton: false,
-        sceneModePicker: false,
-        homeButton: false,
-        geocoder: false,
-        fullscreenButton: false,
-        timeline: false,
-        terrain: new Cesium.Terrain(Cesium.CesiumTerrainProvider.fromUrl(`https://api.maptiler.com/tiles/terrain-quantized-mesh-v2/?key=${key}`, {
-            credit: new Cesium.Credit("\u003ca href=\"https://www.maptiler.com/copyright/\" target=\"_blank\"\u003e\u0026copy;MapTiler\u003c/a\u003e \u003ca href=\"https://www.openstreetmap.org/copyright\" target=\"_blank\"\u003e\u0026copy; OpenStreetMap contributors\u003c/a\u003e", true),
-            requestVertexNormals: true
-        })),
-        baseLayer: new Cesium.ImageryLayer( new Cesium.UrlTemplateImageryProvider({
-            url: `https://api.maptiler.com/tiles/satellite-v2/{z}/{x}/{y}.jpg?key=${key}`,
-            minimumLevel: 0,
-            maximumLevel: 20,
-            tileWidth: 512,
-            tileHeight: 512,
-            credit: new Cesium.Credit("\u003ca href=\"https://www.maptiler.com/copyright/\" target=\"_blank\"\u003e\u0026copy; MapTiler\u003c/a\u003e \u003ca href=\"https://www.openstreetmap.org/copyright\" target=\"_blank\"\u003e\u0026copy; OpenStreetMap contributors\u003c/a\u003e", true)
-        })),
-    });
-    viewer.camera.setView({
-        destination: Cesium.Cartesian3.fromDegrees(8.67, 46.72, 4500),
-        orientation: {
-            pitch: Cesium.Math.toRadians(-20)
-        }
-    });
+    // Initialize the map
+    var map = L.map('map').setView([51.505, -0.09], 13);
+
+    // Add a tile layer
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+    }).addTo(map);
+    fetch('/red_zones') // Adjust this to match your Rails API route
+        .then(response => response.json())
+        .then(data => {
+            data.forEach(zone => {
+                L.geoJSON(zone.geojson, {
+                    style: { color: 'red', weight: 2 }
+                }).addTo(map);
+            });
+        })
+        .catch(error => console.error('Error loading Red Zones:', error));
+
+    // Fetch GeoJSON data and add it to the map
+    fetch('<%= maps_path(format: :json) %>')
+      .then(response => response.json())
+      .then(data => {
+          L.geoJSON(data, {
+              onEachFeature: function (feature, layer) {
+                  layer.bindPopup(feature.properties.name); // Show name on click
+              }
+          }).addTo(map);
+      });
 </script>
-</html>
