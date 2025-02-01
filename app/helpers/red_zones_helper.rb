@@ -1,0 +1,2 @@
+module RedZonesHelper
+end
