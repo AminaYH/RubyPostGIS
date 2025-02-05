@@ -61,29 +61,24 @@
 <script>
     var map = L.map('map');
 
-    // Fetch GeoJSON for France from a reliable source
     $.getJSON('https://raw.githubusercontent.com/johan/world.geo.json/master/countries/FRA.geo.json').then(function(geoJSON) {
 
-        // Create the tile layer with the BoundaryCanvas plugin
         var osm = new L.TileLayer.BoundaryCanvas("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-            boundary: geoJSON,  // Define the boundary for France
+            boundary: geoJSON,
             attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors, France shape <a href="https://github.com/johan/world.geo.json">johan/world.geo.json</a>'
         });
 
-        // Add the tile layer to the map
         map.addLayer(osm);
 
-        // Create a GeoJSON layer to visualize France's boundaries
         var franceLayer = L.geoJSON(geoJSON, {
             style: {
-                color: 'blue',  // Change this to style the boundary of France
+                color: 'blue',
                 weight: 2,
                 fillColor: 'none',
                 fillOpacity: 0.0
             }
         }).addTo(map);
 
-        // Fetch red zones data and add them to the map
         fetch('/red_zones')
           .then(response => response.json())
           .then(data => {
@@ -117,7 +112,6 @@
           })
           .catch(error => console.error('Error fetching red zones:', error));
 
-        // Fit map bounds to the GeoJSON layer for France
         map.fitBounds(franceLayer.getBounds());
     });
 </script>
