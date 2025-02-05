@@ -21,4 +21,7 @@ class MapsController < ApplicationController
       format.json { render json: @geojson } # GeoJSON format for Leaflet
     end
   end
+  def france_geojson
+    send_file Rails.root.join('public', 'france.geojson'), type: 'application/json', disposition: 'inline'
+  end
 end
