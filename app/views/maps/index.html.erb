@@ -67,7 +67,7 @@
     });
 
     // Fetch the geoJSON for France
-    $.getJSON('https://raw.githubusercontent.com/johan/world.geo.json/master/countries/FRA.geo.json').then(function(geoJSON) {
+    $.getJSON('https://raw.githubusercontent.com/georgique/world-geojson/develop/countries/france.json').then(function(geoJSON) {
 
         // Using BoundaryCanvas for better boundary rendering
         var osm = new L.TileLayer.BoundaryCanvas("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
