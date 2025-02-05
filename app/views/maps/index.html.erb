@@ -113,6 +113,16 @@
                               }
                               selectedZone = e.target;
                               e.target.setStyle(selectedStyle);
+                          },
+                          layer.on('mouseover',function (e){
+                              //open a slide
+                              var popup = L.popup()
+                                .setLatLng(e.latlng)
+                                .setContent(e.target.feature.properties.name)
+                                .openOn(map);
+                          }));
+                          layer.on('mouseout',function (e){
+                              map.closePopup();
                           });
                       }
                   }).addTo(map);
