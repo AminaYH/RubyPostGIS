@@ -51,8 +51,39 @@
 <!--    });-->
 <!--</script>-->
 <!--</html>-->
-<div id="map" style="height: 600px;"></div>
 
+<div id="map" style="height: 1000px;"></div>
+<style>
+    /* Map container styling */
+    #map {
+        width: 1000px;
+        height: 1000px;
+        border-radius: 50%;
+        overflow: hidden;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+        border: 5px solid white;
+    }
+
+
+    /* Smooth hover effect */
+    #map:hover {
+        transform: scale(1.02);
+    }
+
+    /* Custom popups */
+    .leaflet-popup-content {
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        font-weight: bold;
+        color: #333;
+    }
+
+    /* Boundary hover effect */
+    .hover-highlight {
+        stroke: #ffcc00 !important;
+        stroke-width: 3 !important;
+    }
+</style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" />
 <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet-src.js"></script>
@@ -120,6 +151,7 @@
                                 .setLatLng(e.latlng)
                                 .setContent(e.target.feature.properties.name)
                                 .openOn(map);
+
                           }));
                           layer.on('mouseout',function (e){
                               map.closePopup();
