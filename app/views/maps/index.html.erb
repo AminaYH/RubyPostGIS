@@ -52,35 +52,37 @@
 <!--</script>-->
 <!--</html>-->
 
-<div id="map" style="height: 1000px;"></div>
+<div id="container">
+  <div id="map"></div>
+  <div id="zone-info">
+    <h2>Zone Information</h2>
+    <p id="zone-details">Click on a zone to see details.</p>
+  </div>
+</div>
 <style>
-    /* Map container styling */
+    /* Parent container to split the screen */
+    #container {
+        display: flex;
+        width: 100vw; /* Full screen width */
+        height: 100vh; /* Full screen height */
+    }
+
+    /* Map styling */
     #map {
-        width: 1000px;
-        height: 1000px;
-        border-radius: 0%;
-        overflow: hidden;
-        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
-        border: 5px solid white;
+        flex: 1; /* Takes up half the screen */
+        height: 100%;
+        border-right: 5px solid white; /* Optional border */
     }
 
-
-    #map:hover {
-        transform: scale(1.02);
+    /* Zone Information Panel */
+    #zone-info {
+        flex: 1; /* Takes up the other half */
+        height: 100%;
+        background: #f8f8f8; /* Light background */
+        padding: 20px;
+        box-shadow: -4px 0px 10px rgba(0, 0, 0, 0.3); /* Optional shadow */
     }
 
-    .leaflet-popup-content {
-        font-family: Arial, sans-serif;
-        font-size: 14px;
-        font-weight: bold;
-        color: #333;
-    }
-
-    /* Boundary hover effect */
-    .hover-highlight {
-        stroke: #ffcc00 !important;
-        stroke-width: 3 !important;
-    }
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" />
@@ -155,7 +157,12 @@
                                   selectedZone.setStyle(originalStyle);
                               }
                               selectedZone = e.target;
+                              //zone info
                               e.target.setStyle(selectedStyle);
+                                document.getElementById('zone-details').innerHTML =
+                                  `<strong>Name:</strong> ${e.target.feature.properties.name} <br>
+         <strong>Area:</strong> ${e.target.feature.properties.area || 'N/A'} km² <br>
+         <strong>Population:</strong> ${e.target.feature.properties.population || 'N/A'}`;
                           },
                           layer.on('mouseover',function (e){
                               //open a slide
